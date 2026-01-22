@@ -1,0 +1,14 @@
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.AssemblyInfoInputs.cache
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.AssemblyInfo.cs
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.csproj.CoreCompileInputs.cache
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\bin\Debug\net8.0\M3.exe
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\bin\Debug\net8.0\M3.deps.json
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\bin\Debug\net8.0\M3.runtimeconfig.json
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\bin\Debug\net8.0\M3.dll
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\bin\Debug\net8.0\M3.pdb
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.dll
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\refint\M3.dll
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.pdb
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.genruntimeconfig.cache
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\ref\M3.dll
