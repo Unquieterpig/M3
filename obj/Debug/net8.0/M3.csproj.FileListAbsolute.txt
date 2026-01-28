@@ -12,3 +12,4 @@ C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\refint\M3.
 C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.pdb
 C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.genruntimeconfig.cache
 C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\ref\M3.dll
+C:\Users\unqui\Documents\CursorProjects\SWENG 421\M3\obj\Debug\net8.0\M3.sourcelink.json

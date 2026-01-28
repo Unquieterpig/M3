@@ -2,9 +2,9 @@ namespace M3;
 
 public abstract class Person
 {
-    public string Name { get; set; }
-    public int Age { get; set; }
-    public string Title { get; set; }
+    public string Name { get; private set; }
+    public int Age { get; private set; }
+    public string Title { get; private set; }
     
     public virtual bool IsAvailable { get; set; } = true;
     
