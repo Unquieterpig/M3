@@ -10,6 +10,15 @@ public class Owner : Person, IMessageSender, IPerformanceEvaluator
     {
     }
 
+    private void send(string message, List<Employee> employees)
+    {
+        Console.WriteLine($"{Name} (Owner) sends message: \"{message}\"");
+        foreach (var employee in employees)
+        {
+            Console.WriteLine($"  -> To: {employee.Name} ({employee.Title})");
+        }
+    }
+
     public void SetMessageDelegate(Person? delegatePerson)
     {
         if (delegatePerson is Manager || delegatePerson is Accountant)
@@ -32,12 +41,8 @@ public class Owner : Person, IMessageSender, IPerformanceEvaluator
                 return;
             }
         }
-
-        Console.WriteLine($"{Name} (Owner) sends message: \"{message}\"");
-        foreach (var employee in employees)
-        {
-            Console.WriteLine($"  -> To: {employee.Name} ({employee.Title})");
-        }
+        
+        send(message, employees);
     }
 
     public void Evaluate(Employee employee, int score)
@@ -55,7 +60,12 @@ public class Owner : Person, IMessageSender, IPerformanceEvaluator
                 return;
             }
         }
+        
+        evaluate(employee, score);
+    }
 
+    private void evaluate(Employee employee, int score)
+    {
         Console.WriteLine($"{Name} (Owner) evaluates {employee.Name} ({employee.Title}) with a score of {score}");
     }
 

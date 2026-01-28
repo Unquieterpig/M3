@@ -2,9 +2,13 @@ namespace M3;
 
 public abstract class Person
 {
-    public string Name { get; private set; }
-    public int Age { get; private set; }
-    public string Title { get; private set; }
+    private string _name;
+    private int _age;
+    private string _title;
+
+    public string Name => _name;
+    public int Age => _age;
+    public string Title => _title;
     
     public virtual bool IsAvailable { get; set; } = true;
     
@@ -12,9 +16,9 @@ public abstract class Person
 
     protected Person(string name, int age, string title)
     {
-        Name = name;
-        Age = age;
-        Title = title;
+        _name = name;
+        _age = age;
+        _title = title;
     }
 
     public void SetDelegate(Person? delegatePerson)

@@ -15,6 +15,12 @@ public class Accountant : Employee, ISalaryUpdater, IMessageSender, ITaskPerform
         return 45000m;
     }
 
+    private void update(Employee employee, decimal amount)
+    {
+        employee.UpdateSalaryInternal(amount);
+        Console.WriteLine($"{Name} (Accountant) updates {employee.Name}'s salary by ${amount:F2}. New salary: ${employee.Salary:F2}");
+    }
+
     public void UpdateSalary(Employee employee, decimal amount)
     {
         if (!IsAvailable && _salaryUpdateDelegate != null)
@@ -26,8 +32,7 @@ public class Accountant : Employee, ISalaryUpdater, IMessageSender, ITaskPerform
             }
         }
 
-        employee.UpdateSalaryInternal(amount);
-        Console.WriteLine($"{Name} (Accountant) updates {employee.Name}'s salary by ${amount:F2}. New salary: ${employee.Salary:F2}");
+        update(employee, amount);
     }
 
     public void SetSalaryUpdateDelegate(Person? delegatePerson)
@@ -42,7 +47,6 @@ public class Accountant : Employee, ISalaryUpdater, IMessageSender, ITaskPerform
         }
     }
 
-    // Additional duty: Message sending (delegated from Owner)
     public void SendMessage(string message, List<Employee> employees)
     {
         Console.WriteLine($"{Name} (Accountant) sends message on behalf: \"{message}\"");
@@ -52,7 +56,6 @@ public class Accountant : Employee, ISalaryUpdater, IMessageSender, ITaskPerform
         }
     }
 
-    // Additional duty: Task performance (helping another employee)
     public void PerformTask(Task task)
     {
         Console.WriteLine($"{Name} (Accountant) performs task {task.Id}: {task.Description}");

@@ -32,12 +32,17 @@ public class Manager : Employee, IPerformanceEvaluator
 
         if (employee is Accountant || employee is Blacksmith)
         {
-            Console.WriteLine($"{Name} (Manager) evaluates {employee.Name} ({employee.Title}) with a score of {score}");
+            evaluate(employee, score);
         }
         else
         {
             throw new ArgumentException("Managers can only evaluate Accountants or Blacksmiths.");
         }
+    }
+
+    private void evaluate(Employee employee, int score)
+    {
+        Console.WriteLine($"{Name} (Manager) evaluates {employee.Name} ({employee.Title}) with a score of {score}");
     }
 
     public void SetEvaluationDelegate(Person? delegatePerson)

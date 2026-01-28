@@ -26,6 +26,11 @@ public class Blacksmith : Employee, ITaskPerformer
             }
         }
 
+        perform(task);
+    }
+
+    private void perform(Task task)
+    {
         Console.WriteLine($"{Name} (Blacksmith) performs task {task.Id}: {task.Description}");
     }
 
