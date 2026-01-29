@@ -17,27 +17,15 @@ public class Manager : Employee, IPerformanceEvaluator
     public void Evaluate(Employee employee, int score)
     {
         if (score < 1 || score > 5)
-        {
             throw new ArgumentException("Evaluation score must be between 1 and 5.");
-        }
 
-        if (!IsAvailable && _evaluationDelegate != null)
-        {
-            if (_evaluationDelegate is IPerformanceEvaluator evaluator)
-            {
-                evaluator.Evaluate(employee, score);
-                return;
-            }
-        }
+        if (TryDelegateTo<IPerformanceEvaluator>(_evaluationDelegate, e => e.Evaluate(employee, score)))
+            return;
 
         if (employee is Accountant || employee is Blacksmith)
-        {
             evaluate(employee, score);
-        }
         else
-        {
             throw new ArgumentException("Managers can only evaluate Accountants or Blacksmiths.");
-        }
     }
 
     private void evaluate(Employee employee, int score)
@@ -47,13 +35,7 @@ public class Manager : Employee, IPerformanceEvaluator
 
     public void SetEvaluationDelegate(Person? delegatePerson)
     {
-        if (delegatePerson is Owner || delegatePerson is Manager)
-        {
-            _evaluationDelegate = delegatePerson;
-        }
-        else
-        {
-            throw new ArgumentException("Evaluation delegation can only be to Owner or another Manager.");
-        }
+        ValidateDelegate(delegatePerson, p => p is Owner || p is Manager, "Evaluation delegation can only be to Owner or another Manager.");
+        _evaluationDelegate = delegatePerson;
     }
 }

@@ -23,28 +23,15 @@ public class Accountant : Employee, ISalaryUpdater, IMessageSender, ITaskPerform
 
     public void UpdateSalary(Employee employee, decimal amount)
     {
-        if (!IsAvailable && _salaryUpdateDelegate != null)
-        {
-            if (_salaryUpdateDelegate is ISalaryUpdater updater)
-            {
-                updater.UpdateSalary(employee, amount);
-                return;
-            }
-        }
-
+        if (TryDelegateTo<ISalaryUpdater>(_salaryUpdateDelegate, u => u.UpdateSalary(employee, amount)))
+            return;
         update(employee, amount);
     }
 
     public void SetSalaryUpdateDelegate(Person? delegatePerson)
     {
-        if (delegatePerson is Accountant)
-        {
-            _salaryUpdateDelegate = delegatePerson;
-        }
-        else
-        {
-            throw new ArgumentException("Salary update delegation can only be to another Accountant.");
-        }
+        ValidateDelegate(delegatePerson, p => p is Accountant, "Salary update delegation can only be to another Accountant.");
+        _salaryUpdateDelegate = delegatePerson;
     }
 
     public void SendMessage(string message, List<Employee> employees)
@@ -63,13 +50,7 @@ public class Accountant : Employee, ISalaryUpdater, IMessageSender, ITaskPerform
 
     public void SetAdditionalDutyDelegate(Person? delegatePerson)
     {
-        if (delegatePerson is Employee)
-        {
-            _additionalDutyDelegate = delegatePerson;
-        }
-        else
-        {
-            throw new ArgumentException("Additional duty delegation can only be to an Employee.");
-        }
+        ValidateDelegate(delegatePerson, p => p is Employee, "Additional duty delegation can only be to an Employee.");
+        _additionalDutyDelegate = delegatePerson;
     }
 }

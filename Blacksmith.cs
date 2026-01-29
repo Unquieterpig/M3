@@ -17,15 +17,8 @@ public class Blacksmith : Employee, ITaskPerformer
 
     public void PerformTask(Task task)
     {
-        if (!IsAvailable && _taskDelegate != null)
-        {
-            if (_taskDelegate is ITaskPerformer performer)
-            {
-                performer.PerformTask(task);
-                return;
-            }
-        }
-
+        if (TryDelegateTo<ITaskPerformer>(_taskDelegate, p => p.PerformTask(task)))
+            return;
         perform(task);
     }
 
@@ -50,13 +43,7 @@ public class Blacksmith : Employee, ITaskPerformer
 
     public void SetTaskDelegate(Person? delegatePerson)
     {
-        if (delegatePerson is Employee)
-        {
-            _taskDelegate = delegatePerson;
-        }
-        else
-        {
-            throw new ArgumentException("Task delegation can only be to an Employee.");
-        }
+        ValidateDelegate(delegatePerson, p => p is Employee, "Task delegation can only be to an Employee.");
+        _taskDelegate = delegatePerson;
     }
 }

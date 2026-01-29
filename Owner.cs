@@ -21,46 +21,24 @@ public class Owner : Person, IMessageSender, IPerformanceEvaluator
 
     public void SetMessageDelegate(Person? delegatePerson)
     {
-        if (delegatePerson is Manager || delegatePerson is Accountant)
-        {
-            _messageDelegate = delegatePerson;
-        }
-        else
-        {
-            throw new ArgumentException("Message delegation can only be to a Manager or Accountant.");
-        }
+        ValidateDelegate(delegatePerson, p => p is Manager || p is Accountant, "Message delegation can only be to a Manager or Accountant.");
+        _messageDelegate = delegatePerson;
     }
 
     public void SendMessage(string message, List<Employee> employees)
     {
-        if (!IsAvailable && _messageDelegate != null)
-        {
-            if (_messageDelegate is IMessageSender sender)
-            {
-                sender.SendMessage(message, employees);
-                return;
-            }
-        }
-        
+        if (TryDelegateTo<IMessageSender>(_messageDelegate, s => s.SendMessage(message, employees)))
+            return;
         send(message, employees);
     }
 
     public void Evaluate(Employee employee, int score)
     {
         if (score < 1 || score > 5)
-        {
             throw new ArgumentException("Evaluation score must be between 1 and 5.");
-        }
 
-        if (!IsAvailable && _evaluationDelegate != null)
-        {
-            if (_evaluationDelegate is IPerformanceEvaluator evaluator)
-            {
-                evaluator.Evaluate(employee, score);
-                return;
-            }
-        }
-        
+        if (TryDelegateTo<IPerformanceEvaluator>(_evaluationDelegate, e => e.Evaluate(employee, score)))
+            return;
         evaluate(employee, score);
     }
 
@@ -71,13 +49,7 @@ public class Owner : Person, IMessageSender, IPerformanceEvaluator
 
     public void SetEvaluationDelegate(Person? delegatePerson)
     {
-        if (delegatePerson is Manager)
-        {
-            _evaluationDelegate = delegatePerson;
-        }
-        else
-        {
-            throw new ArgumentException("Evaluation delegation can only be to a Manager.");
-        }
+        ValidateDelegate(delegatePerson, p => p is Manager, "Evaluation delegation can only be to a Manager.");
+        _evaluationDelegate = delegatePerson;
     }
 }

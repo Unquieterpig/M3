@@ -8,10 +8,9 @@ class Program
     {
         Console.WriteLine("=== XYZ Company Employee Management System ===\n");
 
-        // Create company container
+        // Company container
         Company xyz = new Company();
 
-        // Create all people
         Owner craig = new Owner("Craig", 50, "Owner");
         
         Manager john = new Manager("John", 35, "Manager");
@@ -37,46 +36,38 @@ class Program
         xyz.AddPerson(lin);
         xyz.AddPerson(greg);
 
-        Console.WriteLine("=== Test Scenario 1: Craig sends message to John, Jane, and Jack ===");
+        Console.WriteLine("=== Send Message ===");
         List<Employee> recipients1 = new List<Employee> { john, jane, jack };
         craig.SendMessage("Good Job", recipients1);
         Console.WriteLine();
 
-        Console.WriteLine("=== Test Scenario 2: Greg performs t1 and helps Amy with t2 ===");
+        Console.WriteLine("=== Greg performs t1 and helps Amy with t2 ===");
         Task t1 = new Task("t1", DateTime.Now.AddDays(5), "Greg's own task");
         Task t2 = new Task("t2", DateTime.Now.AddDays(3), "Amy's task");
         
-        // Greg performs both tasks
         greg.AddTask(t1);
         greg.AddTask(t2);
         greg.PerformAllTasks();
         Console.WriteLine();
 
-        Console.WriteLine("=== Test Scenario 3: Jane increases Greg's salary and helps Lin with t3 ===");
-        // Jane increases Greg's salary by $1,000
+        Console.WriteLine("=== Jane increases Greg's salary and helps Lin with t3 ===");
         jane.UpdateSalary(greg, 1000m);
         
-        // Jane helps Lin with task t3
         Task t3 = new Task("t3", DateTime.Now.AddDays(7), "Lin's task");
         jane.PerformTask(t3);
         Console.WriteLine();
 
-        Console.WriteLine("=== Test Scenario 4: Normal evaluations ===");
-        // John evaluates Jack with score 4
+        Console.WriteLine("=== Normal evaluations ===");
         john.Evaluate(jack, 4);
-        
-        // Mary evaluates Katie with score 5
+    
         mary.Evaluate(katie, 5);
         Console.WriteLine();
 
-        Console.WriteLine("=== Test Scenario 5: John delegates evaluation to Craig ===");
-        // John goes out of town
+        Console.WriteLine("=== John delegates evaluation to Craig ===");
         john.IsAvailable = false;
         
-        // John sets Craig as delegate
         john.SetEvaluationDelegate(craig);
         
-        // When John evaluates Jack, it should be delegated to Craig
         john.Evaluate(jack, 4);
         Console.WriteLine();
 

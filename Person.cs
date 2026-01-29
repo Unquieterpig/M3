@@ -25,4 +25,18 @@ public abstract class Person
     {
         Delegate = delegatePerson;
     }
+
+    protected bool TryDelegateTo<T>(Person? delegatePerson, Action<T> action) where T : class
+    {
+        if (IsAvailable || delegatePerson == null || delegatePerson is not T impl)
+            return false;
+        action(impl);
+        return true;
+    }
+
+    protected static void ValidateDelegate(Person? delegatePerson, Func<Person, bool> isAllowed, string errorMessage)
+    {
+        if (delegatePerson != null && !isAllowed(delegatePerson))
+            throw new ArgumentException(errorMessage);
+    }
 }
